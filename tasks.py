@@ -2,7 +2,7 @@ import os
 from celery import Celery
 from celery.utils.log import get_task_logger
 
-app = Celery('tasks', broker=os.getenv("CELERY_BROKER_URL"))
+app = Celery('tasks', broker=os.getenv("CELERY_BROKER_URL", "127.0.0.1"))
 logger = get_task_logger(__name__)
 
 
