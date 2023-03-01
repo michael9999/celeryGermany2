@@ -12,7 +12,7 @@ def add(x, y):
     return x + y
 
 # run_FullSearch.delay(searchpapi)
-@app.task
+@app.task2
 def runFullSearch(name):
     print("run_FullSearch task is running")
     return "running: " + name 
