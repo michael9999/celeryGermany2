@@ -13,6 +13,6 @@ def add(x, y):
 
 
 @app.task
-def run_FullSearch():
+def run_FullSearch(name):
     print("run_FullSearch task is running")
-    return "running"
+    return "running: " + name 

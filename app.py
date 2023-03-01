@@ -33,12 +33,12 @@ def goFullSearch():
     if auth == 'asoidewfoef':
         print("goFullSearch running")
 
-        #searchpapi = request.get_json().get('searchname', '')
+        searchpapi = request.get_json().get('searchname', '')
 
         #searchname = (searchpapi,)
-        
+        #testVar = "michael"
         #task = run_FullSearch.apply_async(searchname, countdown=10)
-        run_FullSearch.delay()
+        run_FullSearch.delay(searchpapi)
 
         #task = run_FullSearch.apply_async(countdown=10)
       
