@@ -38,13 +38,13 @@ def goFullSearch():
         #searchname = (searchpapi,)
         #testVar = "michael"
         #task = run_FullSearch.apply_async(searchname, countdown=10)
-        run_FullSearch.delay(searchpapi)
+        response = run_FullSearch.delay(searchpapi)
 
         #task = run_FullSearch.apply_async(countdown=10)
       
         test_id = "done"
 
-        return test_id
+        return response
 
     else:
         return jsonify({"message": "ERROR: Unauthorized"}), 401
