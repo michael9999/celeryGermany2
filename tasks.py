@@ -11,8 +11,8 @@ def add(x, y):
     logger.info(f'Adding {x} + {y}')
     return x + y
 
-
+# run_FullSearch.delay(searchpapi)
 @app.task
-def run_FullSearch(name):
+def runFullSearch(name):
     print("run_FullSearch task is running")
     return "running: " + name 

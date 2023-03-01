@@ -1,6 +1,6 @@
 import os
 from flask import Flask, flash, render_template, redirect, request, jsonify
-from tasks import add, run_FullSearch
+from tasks import add, runFullSearch
 import json
 # testing, testing
 
@@ -38,7 +38,7 @@ def goFullSearch():
         #searchname = (searchpapi,)
         #testVar = "michael"
         #task = run_FullSearch.apply_async(searchname, countdown=10)
-        run_FullSearch.delay(searchpapi)
+        runFullSearch.delay(searchpapi)
 
         #task = run_FullSearch.apply_async(countdown=10)
       
