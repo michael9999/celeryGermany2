@@ -1,6 +1,7 @@
 import os
 from flask import Flask, flash, render_template, redirect, request, jsonify
-from tasks import add, runFullSearch
+#from tasks import add, runFullSearch
+from tasks import *
 import json
 # testing, testing
 
