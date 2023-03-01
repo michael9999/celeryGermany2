@@ -1,7 +1,7 @@
 import os
-from flask import Flask, flash, render_template, redirect, request
-from tasks import add
-
+from flask import Flask, flash, render_template, redirect, request, jsonify
+from tasks import add, run_FullSearch
+import json
 # testing, testing
 
 app = Flask(__name__)
@@ -38,16 +38,15 @@ def goFullSearch():
         #searchname = (searchpapi,)
         
         #task = run_FullSearch.apply_async(searchname, countdown=10)
+        run_FullSearch.delay()
 
-        task = run_FullSearch.apply_async(countdown=10)
+        #task = run_FullSearch.apply_async(countdown=10)
       
-        test_id = task.id
+        test_id = "done"
 
         return test_id
 
     else:
         return jsonify({"message": "ERROR: Unauthorized"}), 401
     
-@app.task
-def run_FullSearch(searchid):
-    print("run_FullSearch task is running")
+    return "done"

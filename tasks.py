@@ -10,3 +10,9 @@ logger = get_task_logger(__name__)
 def add(x, y):
     logger.info(f'Adding {x} + {y}')
     return x + y
+
+
+@app.task
+def run_FullSearch():
+    print("run_FullSearch task is running")
+    return "running"
