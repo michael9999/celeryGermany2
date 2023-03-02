@@ -26,11 +26,17 @@ def runFullSearch(id):
     query = "?_where[id]="
     searchVal = id
 
+    # strapiApi(airUrl, queryString, search_val)
     goQuery = strapiApi(testUrl, query, searchVal)
 
     logger.info(f'Live search {goQuery}')
 
     print(goQuery)
+
+    # 2) get all patterns
+
+
+
 
     return "running: " + goQuery
 
