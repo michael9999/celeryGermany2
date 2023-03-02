@@ -13,9 +13,12 @@ def add(x, y):
     return x + y
 
 # run_FullSearch.delay(searchpapi)
+
 @app.task
 def runFullSearch(name):
     print("run_FullSearch task is running")
+
+    # 1) Get "Live" search
 
     testUrl = "control-panels"
     query = "?_where[action]="
