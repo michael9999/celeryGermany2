@@ -43,6 +43,6 @@ def runFullSearch(id):
     # getConfigStrapi = get live pattern
 
 
-    return "running: " + goQuery
+    return "running: " + goQuery + " - " + search_var_list_names
 
 
