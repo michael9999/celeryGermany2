@@ -10,6 +10,7 @@ tokenid = "N{t[4AJHBa6]T@#$22"
 
 def strapiApi(airUrl, queryString, search_val):
 
+    # strapiApi(testUrl, query, searchVal)
     #newSentence = name + " " + "Welcome"
 
     #return newSentencekeydbaVNmwfCSbGwj
