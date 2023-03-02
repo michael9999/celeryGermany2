@@ -31,6 +31,7 @@ def runFullSearch(id):
     goQuery = strapiApi(testUrl, query, searchVal)
 
     logger.info(f'Live search {goQuery}')
+    logger.info(f'Is this working?')
 
     print(goQuery)
 
