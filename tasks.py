@@ -15,14 +15,16 @@ def add(x, y):
 # run_FullSearch.delay(searchpapi)
 
 @app.task
-def runFullSearch(name):
+def runFullSearch(id):
     print("run_FullSearch task is running")
 
-    # 1) Get "Live" search
+    # 1) receive id of search triggered in frontend
+
+        # could just ID of search sent
 
     testUrl = "control-panels"
-    query = "?_where[action]="
-    searchVal = "Live"
+    query = "?_where[id]="
+    searchVal = id
 
     goQuery = strapiApi(testUrl, query, searchVal)
 
