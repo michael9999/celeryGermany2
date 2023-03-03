@@ -36,6 +36,7 @@ def goFullSearch():
 
         searchpapi = request.get_json().get('searchname', '')
 
+        app.logger.warning('A log from app.py')
         #searchname = (searchpapi,)
         #testVar = "michael"
         #task = run_FullSearch.apply_async(searchname, countdown=10)
@@ -49,5 +50,7 @@ def goFullSearch():
 
     else:
         return jsonify({"message": "ERROR: Unauthorized"}), 401
+    
+    print("If did not run")
     
     return "done"

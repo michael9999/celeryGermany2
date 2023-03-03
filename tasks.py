@@ -4,7 +4,16 @@ from celery.utils.log import get_task_logger
 from searchStrapiApi import strapiApi
 from getControlPanel import * 
 
-app = Celery('tasks', broker=os.getenv("CELERY_BROKER_URL", "127.0.0.1"))
+# Original
+# app = Celery('tasks', broker=os.getenv("CELERY_BROKER_URL", "127.0.0.1"))
+
+# trial 
+
+app = Celery('tasks', broker=os.getenv("CELERY_BROKER_URL", "redis://localhost:6379")) # works 
+
+# end trial
+
+
 logger = get_task_logger(__name__)
 
 
@@ -20,7 +29,7 @@ def runFullSearch(id):
     print("run_FullSearch task is running")
 
     # 1) receive id of search triggered in frontend
-
+    
         # could just ID of search sent
 
     testUrl = "control-panels"
@@ -30,8 +39,8 @@ def runFullSearch(id):
     # get search clicked on 
     goQuery = strapiApi(testUrl, query, searchVal)
 
-    logger.info(f'Live search {goQuery}')
-    logger.info(f'Is this working?')
+    logger.info(f'Log info: Live search {goQuery}')
+    logger.info(f'Log info: Is this working?')
 
     print(goQuery)
 
@@ -39,11 +48,11 @@ def runFullSearch(id):
 
     search_var_list_names, firm_list_names, nbPages, varPts, firmPts, languagePts, MinPoints, searchName, idNb = getControlPanelDataStrapi(searchVal)
 
-    logger.info(f'Live search {search_var_list_names}')
+    test = "hello"
 
     # getConfigStrapi = get live pattern
 
 
-    return "running: " + goQuery + " - " + search_var_list_names
+    return "running1: " + " - " + test
 
 
