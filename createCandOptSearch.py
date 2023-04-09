@@ -7,15 +7,16 @@ def createCandOptSearch(candidateid):
     #getCandidatesStrapiApi(airUrl):
 
     candidateid = str(candidateid)
-    targeturl = "https://strapi-1oni.onrender.com/candidates/" + candidateid
+    #targeturl = "https://strapi-1oni.onrender.com/candidates/" + candidateid
+    targeturl = "candidates/" + candidateid
 
 # get details of candidate to optimise (search)
 
     getDataToOptim = getCandidatesStrapiApi(targeturl)
 
-    print("createCandOptSearch) Test cand data returned: ", getDataToOptim)
+    #print("createCandOptSearch) Test cand data returned: ", getDataToOptim)
 
-    print("createCandOptSearch) check we have ID: ", getDataToOptim["id"])
+    #print("createCandOptSearch) check we have ID: ", getDataToOptim["id"])
     # for i in getDataToOptim:
 
     # optimisedData = extractKeyData(i)
@@ -24,13 +25,14 @@ def createCandOptSearch(candidateid):
 
         # update candidate here
         # test I have candid
-    print("$$$$$$$$$$$$$$$ curr cand ID is: ", getDataToOptim["id"])
+    #print("$$$$$$$$$$$$$$$ curr cand ID is: ", getDataToOptim["id"])
 
     # strapId = str(i["id"])
 
     strapId = str(getDataToOptim["id"])
 
-    strapiUrl = "https://strapi-1oni.onrender.com/candidates/"
+    #strapiUrl = "https://strapi-1oni.onrender.com/candidates/"
+    strapiUrl = "candidates/"
 
 # add generic internalsearchjson
 
@@ -53,6 +55,6 @@ def createCandOptSearch(candidateid):
     # updateStrapiApi_PC(airUrl, candId, payload)
 
 
-    print("createCandOptSearch) data returned from update: ", update)
+    #print("createCandOptSearch) data returned from update: ", update)
 
     return optimisedData

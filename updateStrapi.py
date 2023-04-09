@@ -1,19 +1,28 @@
 import sys
 import requests, json
-global tokenid
-tokenid = "N{t[4AJHBa6]T@#$22"
+import settings
+
+#global tokenid
+#tokenid = "N{t[4AJHBa6]T@#$22"
+
+
 
 def updateStrapiApi_PC(airUrl, candId, payload):
 
 
-    import sys
-    import requests, json
+    settings.init()
+    #print(settings.currStrapiUrl)
+    rootUrl = settings.currStrapiUrl
+    tokenid = settings.tokenid
+
+    #import sys
+    #import requests, json
 
     #newSentence = name + " " + "Welcome"
-    print("(addStrapiApi) check payload : ")
-    print(payload)
-    print("(addStrapiApi) check URL: ")
-    print(airUrl)
+    #print("(addStrapiApi) check payload : ")
+    #print(payload)
+    #print("(addStrapiApi) check URL: ")
+    #print(airUrl)
 
     headers = {
 
@@ -45,9 +54,11 @@ def updateStrapiApi_PC(airUrl, candId, payload):
     airUrl = str(airUrl)
     candId = str(candId)
 
-    finalUrl = airUrl + candId
+    finalUrl = rootUrl + airUrl + candId
 
-    print("updateStrapiApi_PC) this should be the final url: ", finalUrl)
+    #finalUrl = airUrl + candId
+
+    #print("updateStrapiApi_PC) this should be the final url: ", finalUrl)
     # make request
     # response = requests.request("POST", airUrl, data=json.dumps(payload), headers=headers)
     #response = requests.request("GET", airUrl, data=json.dumps(payload), headers=headers)
@@ -58,7 +69,7 @@ def updateStrapiApi_PC(airUrl, candId, payload):
 
     #print("updateStrapiApi_PC) response from update: ", response)
 
-    print("updateStrapiApi_PC) response from update (all response content?): ", response.content)
+    #print("updateStrapiApi_PC) response from update (all response content?): ", response.content)
 
 
     response_data = response.json()

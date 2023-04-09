@@ -5,6 +5,8 @@ def prepareDate(start, end):
 
     # see what we've received
 
+    print("prepareDate) Running")
+
     # assume there is a month and year
 
     # check if there is a day
@@ -16,14 +18,14 @@ def prepareDate(start, end):
     try:
         if start["day"] and end['day']:
 
-            print(" 1 - BBBBBBBBBBBBBBB - start[day] and end[day]")
-            print("day is assigned continue")
+            #print("prepareDate) 1 - BBBBBBBBBBBBBBB - start[day] and end[day]")
+            #print("prepareDate) day is assigned continue")
             startDate = datetime.datetime(start["year"], start["month"], start["day"])
             endDate = datetime.datetime(end["year"], end["month"], end["day"])
 
             duration = relativedelta(endDate, startDate)
             # print("if start[day] and end[day]) testing duration: ", duration.days)
-            print("if start[day] and end[day]) testing duration: ", duration.days)
+            #print("prepareDate) if start[day] and end[day]) testing duration: ", duration.days)
 
     # check if startDate is identical to endDate
         # if yes, change end["day"] to 30
@@ -32,11 +34,11 @@ def prepareDate(start, end):
     # if no "day" assigned set defaults
 
         else:
-            print(" 2 - BBBBBBBBBBBBBBB - ELSE start[day] and end[day]")
+            #print("prepareDate) 2 - BBBBBBBBBBBBBBB - ELSE start[day] and end[day]")
             start["day"] = 1
             end["day"] = 30
 
-            print(" 3 - BBBBBBBBBBBBBBB - else) default day assigned")
+            #print("prepareDate) 3 - BBBBBBBBBBBBBBB - else) default day assigned")
             startDate = datetime.datetime(start["year"], start["month"], start["day"])
             endDate = datetime.datetime(end["year"], end["month"], end["day"])
 
@@ -45,7 +47,7 @@ def prepareDate(start, end):
 
             if start["year"] == end["year"] and start["month"] == end["month"]:
 
-                print(" 4 - BBBBBBBBBBBBBBB - if start[year] == end[year] and start[month] == end[month]")
+                print("prepareDate) 4 - BBBBBBBBBBBBBBB - if start[year] == end[year] and start[month] == end[month]")
 
                 # duration = relativedelta(endDate, startDate)
                 duration.months = 1
@@ -54,53 +56,63 @@ def prepareDate(start, end):
 
             else:
 
-                print(" 5 - BBBBBBBBBBBBBBB - ELSE - if start[year] == end[year] and start[month] == end[month]")
+                #print("prepareDate) 5 - BBBBBBBBBBBBBBB - ELSE - if start[year] == end[year] and start[month] == end[month]")
 
                 duration = relativedelta(endDate, startDate)
-                print("else) testing duration: ", duration)
+                #print("prepareDate) else) testing duration: ", duration)
 
 # no day found or error, add my own day
 
     except:
 
-        print(" 6 - BBBBBBBBBBBBBBB - EXCEPT")
+        #print("prepareDate) 6 - BBBBBBBBBBBBBBB - EXCEPT")
 
         start["day"] = 1
         end["day"] = 30
         start["month"] = 1
         end["month"] = 1
 
-        print(" 7 - BBBBBBBBBBBBBBB - else) default day assigned")
+        #print("prepareDate) 7 - BBBBBBBBBBBBBBB - else) default day assigned")
         startDate = datetime.datetime(start["year"], start["month"], start["day"])
         endDate = datetime.datetime(end["year"], end["month"], end["day"])
 
         duration = relativedelta(endDate, startDate)
-        print("else) testing duration: ", duration)
+        #print("prepareDate) else) testing duration: ", duration)
 
 # if duration is less than 1 month then return "less than one month"
 # if years and months are set then convert to years
 
     if duration.years and not duration.months:
 
-        print("only years present")
+        #print("prepareDate) only years present")
         duration = duration.years
+
+        #print("prepareDate) 1 final duration: ", duration)
 
     elif duration.months and not duration.years:
 
-        print("only months present")
+        #print("prepareDate) only months present")
         duration = duration.months / 12
         duration = round(duration, 1)
 
+        #print("prepareDate) 2 final duration: ", duration)
+
     elif duration.years and duration.months:
 
-        print("months and years present")
+        #print("prepareDate) months and years present")
 
         # convert months to years
         monthsToYears = duration.months / 12
         duration = monthsToYears + duration.years
         duration = round(duration, 1)
 
+        #print("prepareDate) 3 final duration: ", duration)
+
     elif not duration.years and not duration.months:
         duration = duration.days
+
+        #print("prepareDate) 4 final duration: ", duration)
+
+    print("prepareDate) ********************** FINAL DURATION BEFORE RETURN: ", duration)
 
     return duration

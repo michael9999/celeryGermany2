@@ -7,14 +7,14 @@ def addCandLanguages(testDate):
     langIds = []
 
     nb = len(testDate["languages"]);
-    print("buildSendEducation) ", nb);
+    #print("buildSendEducation) ", nb);
 
     # get all languages from Strapi
 
-    Url = "https://strapi-1oni.onrender.com/"
+    #Url = "https://strapi-1oni.onrender.com/"
     langUrl = "cand-languages"
 
-    getAllLangs = getStrapiApi(Url, langUrl)
+    getAllLangs = getStrapiApi(langUrl) # getStrapiApi(airUrl, strapiSearchName)
 
     # put all strapi languages in object
 
@@ -27,7 +27,7 @@ def addCandLanguages(testDate):
     #for i in nb:
     for i in range(0, nb):
 
-        print("***********************running loop nb: ", i)
+        #print("***********************running loop nb: ", i)
 
         langToAdd = {}
 
@@ -37,15 +37,17 @@ def addCandLanguages(testDate):
 
         if langToAdd["name"] in langObj.keys():
 
-            print("Language already in DB, get id")
+            #print("Language already in DB, get id")
 
             langIds.append(langObj[langToAdd["name"]])
 
         else:
 
-            print("language not found, add to Strapi")
+            #print("language not found, add to Strapi")
 
-            targetUrl = "https://strapi-1oni.onrender.com/cand-languages"
+            # targetUrl = "https://strapi-1oni.onrender.com/cand-languages" - cand-languages
+
+            targetUrl = "cand-languages"
 
             goApi = addStrapiApi(targetUrl, langToAdd)
 

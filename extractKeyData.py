@@ -1,6 +1,6 @@
 def extractKeyData(test):
 
-    print("extractKeyData): data passed in, ", test)
+    #print("extractKeyData): data passed in, ", test)
 
     dataToAdd = " "
 

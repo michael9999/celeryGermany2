@@ -1,4 +1,5 @@
 from getProfileProxy import *
+import time
 
 def handPcResponse(response, test):
     
@@ -6,7 +7,9 @@ def handPcResponse(response, test):
 
     status = response.status_code
 
-    print("HandPcResponse) 1 before while) status code is : ", status)
+    #print("HandPcResponse) 1 before while) status code is ------------------ : ", status)
+
+    #print("HandPcResponse) 2) response object is ------------------ : ", response)
 
     retry = 5
 
@@ -42,8 +45,8 @@ def handPcResponse(response, test):
 
 
     else:
-        print("Task runProxyCurlSingleLatest) else, 1st for) running")
-        print("Task runProxyCurlSingleLatest) : ", status)
+        #print("Task runProxyCurlSingleLatest) else, 1st for) running")
+        #print("Task runProxyCurlSingleLatest) : ", status)
 
     # 1.2 Scrape data
 
@@ -54,15 +57,15 @@ def handPcResponse(response, test):
 
         status= getProfile.status_code
 
-        print("Task runProxyCurlSingleLatest) case 2) status code is : ", status)
+        #print("Task runProxyCurlSingleLatest) case 2) status code is : ", status)
 
-        print("Task runProxyCurlSingleLatest) case 2) scraped data is : ", getProfile)
+        #print("Task runProxyCurlSingleLatest) case 2) scraped data is : ", getProfile)
 
         retry = 5
 
         if status != 200:
 
-            print("Task runProxyCurlSingleLatest) case2 If) server error, status code is: ", status)
+            #print("Task runProxyCurlSingleLatest) case2 If) server error, status code is: ", status)
             max_guesses = 5
             nb = 0
 
@@ -72,17 +75,17 @@ def handPcResponse(response, test):
 
                 time.sleep(30)
 
-                print("Task runProxyCurlSingleLatest) case2) run: ", nb)
+                #print("Task runProxyCurlSingleLatest) case2) run: ", nb)
 
                 # retry
 
                 getProfile = getProfileProxyCurl(test)
                 status = getProfile.status_code
-                print("Task runProxyCurlSingleLatest) case2) status code is : ", status)
+                #print("Task runProxyCurlSingleLatest) case2) status code is : ", status)
 
                 if status != 200:
 
-                    print("Task runProxyCurlSingleLatest) case2 in while loop) status code is not 200: ", status)
+                    #print("Task runProxyCurlSingleLatest) case2 in while loop) status code is not 200: ", status)
                     nb += 1
                     continue
 
@@ -91,8 +94,8 @@ def handPcResponse(response, test):
                     return getProfile
                     
 
-            print("Task runProxyCurlSingle) After status checks) status code should be 200: ", status)
-            print("Task runProxyCurlSingle) test contents of scrapedProfile: ", getProfile)
+            # print("Task runProxyCurlSingle) After status checks) status code should be 200: ", status)
+            # print("Task runProxyCurlSingle) test contents of scrapedProfile: ", getProfile)
         
         else:
             return getProfile

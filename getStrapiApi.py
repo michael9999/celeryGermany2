@@ -1,9 +1,16 @@
-def getStrapiApi(airUrl, strapiSearchName):
+import settings
+import sys
+import requests, json
 
+#def getStrapiApi(airUrl, strapiSearchName):
+def getStrapiApi(airUrl):    
 
-    import sys
-    import requests, json
-    tokenid = "N{t[4AJHBa6]T@#$22"
+    settings.init()
+    #print(settings.currStrapiUrl)
+    rootUrl = settings.currStrapiUrl
+    tokenid = settings.tokenid
+
+    #tokenid = "N{t[4AJHBa6]T@#$22"
 
     #newSentence = name + " " + "Welcome"
     ## # print("(addStrapiApi) check payload : ")
@@ -31,10 +38,13 @@ def getStrapiApi(airUrl, strapiSearchName):
     #resp= requests.get("https://stackoverflow.com/")
     #resp_dict = json.loads(resp.text)
     ## print(resp_dict)
+    
+    finalUrl = rootUrl
+    # finalUrl = airUrl + strapiSearchName
 
-    finalUrl = airUrl + strapiSearchName
+    finalUrl = finalUrl + airUrl
 
-    print("getStrapiApi) this should be the final url: ", finalUrl)
+    #print("getStrapiApi) this should be the final url: ", finalUrl)
     # make request
     # response = requests.request("POST", airUrl, data=json.dumps(payload), headers=headers)
     #response = requests.request("GET", airUrl, data=json.dumps(payload), headers=headers)

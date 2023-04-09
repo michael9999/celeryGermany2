@@ -6,7 +6,7 @@ import json
 # testing, testing
 
 app = Flask(__name__)
-app.secret_key = os.getenv('FLASK_SECRET_KEY', "super-secret")
+app.secret_key = os.getenv('FLASK_SECRET_KEY', "asoidewfoef") # defaults to local
 
 
 @app.route('/')
@@ -31,7 +31,8 @@ def goFullSearch():
     headers = request.headers
     auth = headers.get("X-Api-Key")
 
-    if auth == 'asoidewfoef':
+    #if auth == 'asoidewfoef':
+    if auth == app.secret_key:
         print("goFullSearch running")
 
         searchpapi = request.get_json().get('searchname', '')

@@ -15,9 +15,9 @@ def getConfigStrapi(id):
     #query = "?_where[id]="
     #searchVal = searchid
 
-    patterns = strapiApi(testUrl, query, searchVal)
+    patterns = getStrapiApi(testUrl, query, searchVal)
 
-    print("testing patterns $$$$$$$$$$$$$$ : ", patterns)
+    #print("testing patterns $$$$$$$$$$$$$$ : ", patterns)
 
     list_patterns = list()
 
@@ -25,13 +25,13 @@ def getConfigStrapi(id):
 
         if 'pattern' in record:
 
-            print("pattern found ***************")
-            print(record['pattern'])
+            #print("pattern found ***************")
+            #print(record['pattern'])
 
             list_patterns.append(record['pattern'])
 
 
-    print("print all patterns:  ")
-    print(list_patterns)
+    #print("print all patterns:  ")
+    #print(list_patterns)
     return list_patterns
 

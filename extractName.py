@@ -23,7 +23,7 @@ def formatName(searchEngine, Cname2):
 
     elif searchEngine == "viadeo":
         #Edouard Merlin (France) | Viadeo
-        print("target is viadeo")
+        #print("target is viadeo")
         searchType = "viadeo"
         #Cname3 = Cname2.split(' ')[1]
         #CnameFinal = Cname3.strip()
@@ -39,14 +39,14 @@ def formatName(searchEngine, Cname2):
         #finalCount = len(Cname3.split())
 
         #print("here's the number of names in the string")
-        print(Cname3)
+        #print(Cname3)
 
-        print("this is the stripped candidate name (viadeo)")
+        #print("this is the stripped candidate name (viadeo)")
         CnameFinal = Cname3
 
 
     else:
-        print("$$$$$$$$$$$$$$$$ target not recognised **********************")
+        #print("$$$$$$$$$$$$$$$$ target not recognised **********************")
         searchType = "not recognised"
 
 

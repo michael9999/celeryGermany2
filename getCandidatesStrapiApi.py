@@ -1,9 +1,17 @@
 import sys
 import requests, json
-global tokenid
-tokenid = "N{t[4AJHBa6]T@#$22"
+import settings
+
+#global tokenid
+#tokenid = "N{t[4AJHBa6]T@#$22"
 
 def getCandidatesStrapiApi(airUrl):
+
+    settings.init()
+    print(settings.currStrapiUrl)
+    rootUrl = settings.currStrapiUrl
+    tokenid = settings.tokenid
+
 
     #newSentence = name + " " + "Welcome"
     ## # print("(addStrapiApi) check payload : ")
@@ -36,12 +44,13 @@ def getCandidatesStrapiApi(airUrl):
     #print("$$$$$$$$$$$$$$$$$ - DATA TO ADD - $$$$$$$$$$$$$$")
     # print(payload)
 
-
+    finalUrl = rootUrl + airUrl
+    airUrl = finalUrl
 
     # make request
     # response = requests.request("POST", airUrl, data=json.dumps(payload), headers=headers)
     response = requests.request("GET", airUrl, headers=headers)
-    print("getCandidatesStrapiApi) inside strapi api sent) ", response)
+    #print("getCandidatesStrapiApi) inside strapi api sent) ", response)
     response_data = response.json()
     ## print("(addStrapiApi) # printing response")
     #print("response from strapi: ", response_data)

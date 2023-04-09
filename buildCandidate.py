@@ -2,10 +2,19 @@
 from datetime import *
 from time import *
 from addStrapi import *
+from GetYrsExp import *
+from prepareDate import *
 
-def buildCandidate(pqResult, liUrl):
+def buildCandidate(pqResult, liUrl, stageTerms):
+
+    print("buildCandidate 1) Running : ", liUrl)
+    print("buildCandidate 1.1) stageTerms : ", stageTerms)
     
     new_candidate = {}
+    currJtitle = ""
+    currFirm = ""
+    totalDurationYrs = 0
+    totalDurationMnths = 0
 
     for i in pqResult:
         #if "full_name" in i:
@@ -19,7 +28,8 @@ def buildCandidate(pqResult, liUrl):
             # print("1) candidate data is ", new_candidate["name"] )
         else:
             # continue
-            print("no full_name")
+            #print("no full_name")
+            fullName = "no given"
             # new_candidate["name"] = new_candidate["name"] + " null"
 
         if i == "first_name":
@@ -35,11 +45,14 @@ def buildCandidate(pqResult, liUrl):
         if i == "city":
             # print(pqResult[i])
             new_candidate["location"] = pqResult[i]
+            currLocation = new_candidate["location"]
             # print("4) candidate location is ", new_candidate["location"])
 
         if i == "occupation":
             # print(pqResult[i])
             new_candidate["job_title"] = pqResult[i]
+            currJtitle = pqResult[i]
+            
             # print("4) candidate jobtitle is ", new_candidate["job_title"])
         else:
             new_candidate["job_title"] = "Current jobtitle not set"
@@ -49,23 +62,23 @@ def buildCandidate(pqResult, liUrl):
             new_candidate["notes"] = pqResult[i]
             # print("4) candidate notes is ", new_candidate["notes"])
         else:
-            print("no notes")
+            #print("buildCandidate 2) no notes")
             new_candidate["job_title"] = "Current jobtitle not set"
             #new_candidate["job_title"] = pqResult[i]
             #new_candidate["notes"] = new_candidate["notes"] + " null"
 
     try:
         if new_candidate["notes"]:
-            print("notes is set")
+            print("buildCandidate 3) notes is set")
     except:
-        print("set notes to null")
+        #print("buildCandidate 4) set notes to null")
         new_candidate["notes"] = "null"
 
     try:
         if new_candidate["name"]:
-            print("full name is set")
+            print("buildCandidate 5) full name is set")
     except:
-        print("set name to null")
+        #print("buildCandidate 6) set name to null")
         new_candidate["name"] = "null"
 
     # set candidate url
@@ -80,7 +93,7 @@ def buildCandidate(pqResult, liUrl):
 
     today = str(today)
 
-    print("buildCandidate) Today's date:", today)
+    #print("buildCandidate 7) Today's date:", today)
 
     new_candidate["date_added"] = today
 
@@ -89,6 +102,7 @@ def buildCandidate(pqResult, liUrl):
         if pqResult["experiences"][0]["company"]:
 
             new_candidate["company"] = pqResult["experiences"][0]["company"]
+            currFirm = pqResult["experiences"][0]["company"]
 
         else:
             new_candidate["company"] = "unknown"
@@ -102,6 +116,8 @@ def buildCandidate(pqResult, liUrl):
             new_candidate["profile_type"] = "all, " + pqResult["experiences"][0]["title"]
     # last chance to set jobtitle if experience contains at job title
             new_candidate["job_title"] = pqResult["experiences"][0]["title"]
+            currJtitle = pqResult["experiences"][0]["title"]
+            
 
         else:
             new_candidate["profile_type"] = "all, "
@@ -112,19 +128,27 @@ def buildCandidate(pqResult, liUrl):
     try:
         if isinstance(pqResult["experiences"][0]["ends_at"], dict) and isinstance(pqResult["experiences"][0]["starts_at"], dict):
 
-            print("end date is set")
-            print(pqResult["experiences"][0]["ends_at"])
+            #print("buildCandidate 8) end date is set")
+            #print(pqResult["experiences"][0]["ends_at"])
             duration = prepareDate(pqResult["experiences"][0]["starts_at"], pqResult["experiences"][0]["ends_at"])
+            
+            #print("buildCandidate 9) returnned from prepareDate (time in post): ", duration)
+            
             new_candidate["time_in_post"] = duration
 
         elif isinstance(pqResult["experiences"][0]["ends_at"], dict):
-            print("only have ends_at")
+            print("buildCandidate 10) only have ends_at")
             duration = 0
             new_candidate["time_in_post"] = duration
 # what if no end date?
 
         elif isinstance(pqResult["experiences"][0]["starts_at"], dict):
-            print("only have starts_at")
+            print("buildCandidate 11) only have starts_at")
+
+            # TO DO
+            # assume candidate is still in post
+                # time in post == Today's date - pqResult["experiences"][0]["starts_at"])
+
             duration = 0
             new_candidate["time_in_post"] = duration
 
@@ -135,16 +159,20 @@ def buildCandidate(pqResult, liUrl):
             duration = 0
             new_candidate["time_in_post"] = duration
     except:
+        print("buildCandidate 11.1) time poste calculation failed")
         duration = 0
         new_candidate["time_in_post"] = duration
 
 
     # Get nb of years worked
     try:
-        nbYrsExp = GetYrsExp(pqResult)
+        nbYrsExp = GetYrsExp(pqResult, stageTerms)
+        print("buildCandidate 12) returnned from GetYrsExp (yrs exp): ", nbYrsExp)
+        new_candidate["years_exp"] = int(nbYrsExp)
         
     except:
         nbYrsExp = 0
+        print("buildCandidate 12.5) EXCEPT CLAUSE: ", nbYrsExp)
         new_candidate["years_exp"] = nbYrsExp
 
     # calculate time in post
@@ -165,15 +193,16 @@ def buildCandidate(pqResult, liUrl):
     new_candidate["optimisestatus"] = "TO DO"
 
     # print all data for new candidate
-    print("final candidate object @@@@@@@@@@@@@ ", new_candidate);
+    # print("buildCandidate 13) final candidate object @@@@@@@@@@@@@ ", new_candidate)
 
 
     # ADD TO STRAPI HERE
-    sUrl = "https://strapi-1oni.onrender.com/candidates"
+    #sUrl = "https://strapi-1oni.onrender.com/candidates"
+    sUrl = "candidates"
 
     testAdd = addStrapiApi(sUrl, new_candidate)
 
     # print("test data returned from Strapi: Add candidate ------- ", testAdd)
-    print("00000000000000 - returned cand ID - ", testAdd["id"])
+    print("buildCandidate 14) 00000000000000 - returned cand ID - ", testAdd["id"])
     # return testAdd
-    return testAdd["id"]
+    return testAdd["id"], currJtitle, currFirm, currLocation, nbYrsExp, new_candidate["name"]

@@ -1,14 +1,24 @@
-    # Choose query via variable
+# Choose query via variable
 import sys
 import requests, json
-global tokenid
-tokenid = "N{t[4AJHBa6]T@#$22"
+import settings
+
+#global tokenid
+#tokenid = "N{t[4AJHBa6]T@#$22"
+
+
     # 31/07/2019
 
 # try function syntaxe
 # function requires a search name, url, query, search tab & search value
 
 def strapiApi(airUrl, queryString, search_val):
+
+
+    settings.init()
+    #print(settings.currStrapiUrl)
+    rootUrl = settings.currStrapiUrl
+    tokenid = settings.tokenid
 
     # strapiApi(testUrl, query, searchVal)
     #newSentence = name + " " + "Welcome"
@@ -37,16 +47,16 @@ def strapiApi(airUrl, queryString, search_val):
 
     search_val = str(search_val)
 
-    print("this is what we are searching for: " + search_val)
+    #print("this is what we are searching for: " + search_val)
     
     # build query string
 
 
-    rootUrl = "https://strapi-1oni.onrender.com/"
+    # rootUrl = "https://strapi-1oni.onrender.com/"
 
     finalairUrl = rootUrl + airUrl + queryString + search_val
 
-    print("Final STRAPI URL: ", finalairUrl)
+    #print("Final STRAPI URL: ", finalairUrl)
 
 
     # make request

@@ -22,6 +22,10 @@ def getControlPanelDataStrapi(searchid):
     MinPoints = 0
     searchName = ""
     idNb = ""
+    jobbytitles = ""
+    jobtitlePoints = 0
+    locationPoints = 0
+
 
     # strapiApi(airUrl, queryString, search_val)
 
@@ -40,7 +44,7 @@ def getControlPanelDataStrapi(searchid):
 
         # Live searches were found
     else:
-        print("getControlPanelData(): Entry found")
+        #print("getControlPanelData(): Entry found new")
 
         # Set variables Names of lists (Firms and Search variables)
 
@@ -55,20 +59,27 @@ def getControlPanelDataStrapi(searchid):
 
         ######## Get name of search variable list
 
+            # check for assigned job id
+
+            if record == "job": 
+                #print("JOB ID is:", test[0][record]['id'])
+                jobID = test[0][record]['id']
+
+
 
             if 'searchterms' in record:
                 #for term in record['searchterms']:
                 #search_var_list_names.append(test[0][record])
                 search_var_list_names.append(test[0][record])
-                print("print search term")
-                print(search_var_list_names)
+                #print("print search term")
+                #print(search_var_list_names)
 
 
             if 'firms' in record:
                 # for comp in record['fields']['FirmList']:
                 firm_list_names.append(test[0][record])
-                print("print firms")
-                print(firm_list_names)
+                #print("print firms")
+                #print(firm_list_names)
 
 
             if 'nbpages' in record:
@@ -76,32 +87,106 @@ def getControlPanelDataStrapi(searchid):
                     #nbPages = pagina
                 #nbPages = record['fields']['Nb_pages_search_engine']
                 nbPages = test[0][record]
-                print("print nb pages")
-                print(nbPages)
+                #print("print nb pages")
+                #print(nbPages)
 
 
             if 'variablepoints' in record:
 
+
+                if test[0]['variablepoints'] == None:
+            
+                    print("no points")
+                    varPts = 0  
+                    
+                else:
+
+                    print(test[0]['variablepoints'])
+                    #MinPoints = test[0][record]    
+                    varPts = test[0]['variablepoints']    
+
                 # varPts = record['fields']['VariablePoints']
-                varPts = test[0][record]
-                print("print var points")
-                print(varPts)
+                #varPts = test[0][record]
+                #print("print var points")
+                #print(varPts)
 
 
             if 'firmpoints' in record:
 
-                firmPts = test[0][record]
+                if test[0]['firmpoints'] == None:
+            
+                    print("no points")
+                    firmPts = 0  
+                    
+                else:
+
+                    print(test[0]['firmpoints'])
+                    #MinPoints = test[0][record]    
+                    firmPts = test[0]['firmpoints']    
+
+                #firmPts = test[0][record]
 
 
             if 'languagepoints' in record:
 
-                languagePts = test[0][record]
+                if test[0]['languagepoints'] == None:
+            
+                    print("no points")
+                    languagePts = 0  
+                    
+                else:
+
+                    print(test[0]['languagepoints'])
+                    #MinPoints = test[0][record]    
+                    languagePts = test[0]['languagepoints']
 
 
             if 'minpoints' in record:
 
-                MinPoints = test[0][record]
+                if test[0]['minpoints'] == None:
+            
+                    print("no points")
+                    MinPoints = 0  
+                    
+                else:
 
+                    print(test[0]['minpoints'])
+                    #MinPoints = test[0][record]    
+                    MinPoints = test[0]['minpoints'] #jobtitlePoints
+               
+
+            if 'jobtitlepoints' in record:
+        
+                # check actual points have been set for jobtitle points
+
+                if test[0]['jobtitlepoints'] == None:
+            
+                    print("no points")
+                    jobtitlePoints = 0  
+                    
+                else:
+
+                    print(test[0]['jobtitlepoints'])
+                    jobtitlePoints = test[0]['jobtitlepoints'] #jobtitlePoints
+
+
+            if 'locationpoints' in record:
+        
+                if test[0]['locationpoints'] == None:
+            
+                    print("no points")
+                    locationPoints = 0  
+
+                else:
+
+                    print(test[0]['jobtitlepoints'])
+                    locationPoints = test[0]['locationpoints']
+
+                  
+
+            if 'jobtitles' in record: 
+
+                jobbytitles = test[0][record]
 
             if 'name' in record:
 
@@ -111,4 +196,4 @@ def getControlPanelDataStrapi(searchid):
 
                 idNb = test[0][record]
 
-    return search_var_list_names, firm_list_names, nbPages, varPts, firmPts, languagePts, MinPoints, searchName, idNb
+    return search_var_list_names, firm_list_names, nbPages, varPts, firmPts, languagePts, MinPoints, searchName, idNb, jobbytitles, jobID, jobtitlePoints, locationPoints

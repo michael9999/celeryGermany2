@@ -6,8 +6,8 @@ def buildSendEducation(testDate):
     # set array of work experiences
     educIds = []
 
-    nb = len(testDate["education"]);
-    print("buildSendEducation) ", nb);
+    nb = len(testDate["education"])
+    print("buildSendEducation) ", nb)
 
     #print(testDate["experiences"][0])
     #for i in nb:
@@ -36,7 +36,7 @@ def buildSendEducation(testDate):
                 testMonth = str(testDate["education"][i]["starts_at"]["month"])
                 testYear = str(testDate["education"][i]["starts_at"]["year"])
                 textStartDate = testDay + "/" + testMonth + "/" + testYear
-                print("1) full start date is", textStartDate)
+                #print("1) full start date is", textStartDate)
                 educationToAdd["start"] = textStartDate
 
             else:
@@ -44,7 +44,7 @@ def buildSendEducation(testDate):
                 testMonth = str(testDate["education"][i]["starts_at"]["month"])
                 testYear = str(testDate["education"][i]["starts_at"]["year"])
                 textStartDate = testMonth + "/" + testYear
-                print("2) full start date is", textStartDate)
+                #print("2) full start date is", textStartDate)
                 educationToAdd["start"] = textStartDate
 
     # end date
@@ -55,21 +55,21 @@ def buildSendEducation(testDate):
 
         if isinstance(testDate["education"][i]["ends_at"], dict) and isinstance(testDate["education"][i]["starts_at"], dict):
 
-            print("isinstance(testDate) - ends_at and starts_at present");
-            print("isinstance(testDate) starts_at ---------", testDate["education"][i]["starts_at"])
-            print("isinstance(testDate) ends_at ---------", testDate["education"][i]["ends_at"])
+            #print("isinstance(testDate) - ends_at and starts_at present");
+            #print("isinstance(testDate) starts_at ---------", testDate["education"][i]["starts_at"])
+            #print("isinstance(testDate) ends_at ---------", testDate["education"][i]["ends_at"])
 
             educationToAdd["duration"] = prepareDate(testDate["education"][i]["starts_at"], testDate["education"][i]["ends_at"])
-            print("Duration of experience: ****** ", educationToAdd["duration"])
+            #print("Duration of experience: ****** ", educationToAdd["duration"])
 
         if isinstance(testDate["education"][i]["ends_at"], dict):
 
-            print("This is a dictionary")
-            print("printing month ends at", testDate["education"][i]["ends_at"]["month"])
+            #print("This is a dictionary")
+            #print("printing month ends at", testDate["education"][i]["ends_at"]["month"])
             testMonth = str(testDate["education"][i]["ends_at"]["month"])
             testYear = str(testDate["education"][i]["ends_at"]["year"])
             textEndDate = testMonth + "/" + testYear
-            print("full END date is", textEndDate)
+            #print("full END date is", textEndDate)
             educationToAdd["end"] = textEndDate
 
         else:
@@ -93,7 +93,7 @@ def buildSendEducation(testDate):
 
             currEducTitle = testDate["education"][i]["degree_name"]
             educationToAdd["qualification_name"] = currEducTitle
-            print(educationToAdd)
+            #print(educationToAdd)
 
         else:
             educationToAdd["qualification_name"] = "Not provided"
@@ -103,14 +103,14 @@ def buildSendEducation(testDate):
 
             currEducTitle = testDate["education"][i]["degree_name"] + " - " + testDate["education"][i]["field_of_study"]
             educationToAdd["qualification_name"] = currEducTitle
-            print(educationToAdd)
+            #print(educationToAdd)
 
 
         if testDate["education"][i]["school"]:
 
             currSchool = testDate["education"][i]["school"]
             educationToAdd["school_name"] = currSchool
-            print(educationToAdd)
+            #print(educationToAdd)
 
         else:
             educationToAdd["school_name"] = "Not provided"
@@ -119,21 +119,23 @@ def buildSendEducation(testDate):
 
             currDescription = testDate["education"][i]["description"]
             educationToAdd["description"] = str(currDescription)
-            print(educationToAdd)
+            #print(educationToAdd)
 
         else:
             educationToAdd["description"] = "Not provided"
 
     # Send to strapi
 
-        print("@@@@@@@@@@@@@@@@@@@ - PRINT FINAL DATA TO ADD @@@@@@@@@@@@@@@@@@@", educationToAdd)
+        #print("@@@@@@@@@@@@@@@@@@@ - PRINT FINAL DATA TO ADD @@@@@@@@@@@@@@@@@@@", educationToAdd)
 
     # Add to Strapi educations here
 
     # https://strapi-public-test.herokuapp.com/admin/educations
     # def addStrapiApi(airUrl, payload):
 
-        targetUrl = "https://strapi-1oni.onrender.com/educations"
+        #targetUrl = "https://strapi-1oni.onrender.com/educations"
+
+        targetUrl = "educations"
 
         goApi = addStrapiApi(targetUrl, educationToAdd)
 
