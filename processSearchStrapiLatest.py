@@ -16,6 +16,7 @@ from getProfileProxy import *
 from responseProxyCurl import *
 from addStrapi import *
 from checkForVars import *
+import urllib.parse
 
 def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searchName, list_variables, FIRMList, Language, searchID, jobtitles, stageTerms, jobID, jobPts, locPts):
     
@@ -126,8 +127,14 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
 
                 # check if profile is already in db (linkedin_url)
 
+                    # try to set LI url to UTF8 - for bloody french accents!
+
+                    decoded_liUrl = urllib.parse.unquote(li["link"])
+
                     #print("processSearchGo) this is url we are searching for : " + li["link"])
-                    existCand = existingCandidate(li["link"])
+                    #existCand = existingCandidate(li["link"])
+                    existCand = existingCandidate(decoded_liUrl)
+
                     tempName = li["title"]
                     #print("processSearchGo) in db or not? ", existCand)
 

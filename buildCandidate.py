@@ -4,6 +4,7 @@ from time import *
 from addStrapi import *
 from GetYrsExp import *
 from prepareDate import *
+import urllib.parse
 
 def buildCandidate(pqResult, liUrl, stageTerms):
 
@@ -85,7 +86,7 @@ def buildCandidate(pqResult, liUrl, stageTerms):
 
     # liUrl
 
-    new_candidate["li_url"] = liUrl
+    new_candidate["li_url"] = urllib.parse.unquote(liUrl)
 
     # set date added, convert to string
 
