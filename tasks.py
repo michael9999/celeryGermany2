@@ -29,7 +29,7 @@ def add(x, y):
 
 @app.task
 def runFullSearch(id):
-    print("run_FullSearch task is running")
+    print("run_FullSearch task is running 10")
 
     # 1) receive id of search triggered in frontend
 
