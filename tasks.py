@@ -40,8 +40,8 @@ def runFullSearch(id):
     # get search clicked on 
     goQuery = strapiApi(testUrl, query, searchVal)
 
-    logger.info(f'Log info: Live search {goQuery}')
-    logger.info(f'Log info: Is this working?')
+    print('Log info: Live search', goQuery)
+    
 
     #print(goQuery)
 
