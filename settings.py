@@ -11,15 +11,19 @@ def init():
 
     # Strapi
     tokenid = os.getenv('TOKEN_ID', "team")
+    
 
-    # Celery
+    # Starpi URL
     currStrapiUrl = os.getenv('CELERY_URL', "http://localhost:1337/")
+    
 
     # Proxy curl
     api_key = os.getenv('PROXY_CURL', "http://localhost:1337/")
+    
 
     # Serpapi SERPAPI_KEY
     serp_api_key = os.getenv('SERPAPI_KEY', "http://localhost:1337/")
+    
 
     myList = []
     # local
