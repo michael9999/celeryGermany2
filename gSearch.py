@@ -28,6 +28,7 @@ def gSearch(chosenEntity, NbPages):
     import psutil
     import re
     import datetime
+    import settings
 
 
     # build query for google
@@ -35,6 +36,8 @@ def gSearch(chosenEntity, NbPages):
     search_query_content = chosenEntity
 
     nbPages = NbPages
+
+    serp_api_key2 = settings.serp_api_key
 
 
 
@@ -47,9 +50,9 @@ def gSearch(chosenEntity, NbPages):
         "google_domain": "google.fr",
         "gl": "fr",
         "hl": "fr",
-        "start": "0", # changed to from 1 to 0 21/03
+        "start": "0", # changed to from 1 to 0 21/03 - serp_api_key2
         "num": nbPages,
-        "serp_api_key": "f417f9663423a0dd56863c429ae6032e50897ca366ef58a54becd55ab19428b3"
+        "serp_api_key": serp_api_key2
 
     }
 

@@ -1,6 +1,7 @@
 def getProfileProxyCurl(liUrl):
 
     import requests
+    import settings
 
     api_endpoint = 'https://nubela.co/proxycurl/api/v2/linkedin'
 
@@ -37,9 +38,9 @@ def getProfileProxyCurl(liUrl):
     # test
     #liUrl = "https://fr.linkedin.com/in/karinedisdiermikus/en/"
 
-    api_key = 'eddb274d-e91f-45f6-9c52-2fe17de2b98a'
+    api_key2 = settings.api_key
 
-    header_dic = {'Authorization': 'Bearer ' + api_key}
+    header_dic = {'Authorization': 'Bearer ' + api_key2}
     params = {
 
         #'url': 'https://www.linkedin.com/in/in%C3%A8s-touati-40b250150/',

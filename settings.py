@@ -2,15 +2,24 @@ def init():
     global myList
     global currStrapiUrl
     global tokenid
+    global api_key
+    global serp_api_key
     import os
 
     # main site
     #tokenid = os.getenv('TOKEN_ID', "N{t[4AJHBa6]T@#$22")
 
-    # local testing
+    # Strapi
     tokenid = os.getenv('TOKEN_ID', "team")
 
+    # Celery
     currStrapiUrl = os.getenv('CELERY_URL', "http://localhost:1337/")
+
+    # Proxy curl
+    api_key = os.getenv('PROXY_CURL', "http://localhost:1337/")
+
+    # Serpapi SERPAPI_KEY
+    serp_api_key = os.getenv('SERPAPI_KEY', "http://localhost:1337/")
 
     myList = []
     # local
