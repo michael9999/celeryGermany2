@@ -20,6 +20,8 @@ def strapiApi(airUrl, queryString, search_val):
     rootUrl = settings.currStrapiUrl
     tokenid = settings.tokenid
 
+    print("see if we have correct tokens: ",  rootUrl, " - ", tokenid)
+
     # strapiApi(testUrl, query, searchVal)
     #newSentence = name + " " + "Welcome"
 

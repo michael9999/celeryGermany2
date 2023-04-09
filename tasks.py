@@ -37,6 +37,8 @@ def runFullSearch(id):
     query = "?_where[id]="
     searchVal = id
 
+    print("tasks.py) id sent to strapi: ", searchVal)
+
     # get search clicked on 
     goQuery = strapiApi(testUrl, query, searchVal)
 
