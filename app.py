@@ -35,6 +35,14 @@ def goFullSearch():
     if auth == app.secret_key:
         print("goFullSearch running")
 
+        import settings
+        settings.init()
+        rootUrl = settings.currStrapiUrl
+        tokenid = settings.tokenid
+        print("check token : ", tokenid)
+        print("check rooter: ", rootUrl)
+
+
         searchpapi = request.get_json().get('searchname', '')
 
         app.logger.warning('A log from app.py')
