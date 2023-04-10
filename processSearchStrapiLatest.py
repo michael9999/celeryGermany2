@@ -24,18 +24,18 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
     
     #print("processSearchGo) running")
     # res, nbPages, varPts, firmPts, languagePts, MinPoints, searchName, list_variables, FIRMList, Language, psssID
-    #print(res)
-    #print(nbPages)
-    #print(varPts)
-    #print(firmPts)
-    #print(languagePts)
-    #print(MinPoints)
-    #print(searchName)
-    #print(list_variables)
-    #print(Language)
-    #print(FIRMList)
-    #print(searchID)
-    #print(jobtitles)
+    print(res)
+    print(nbPages)
+    print(varPts)
+    print(firmPts)
+    print(languagePts)
+    print(MinPoints)
+    print(searchName)
+    print(list_variables)
+    print(Language)
+    print(FIRMList)
+    print(searchID)
+    print(jobtitles)
     print("processSearchGo) - work experiences terms - ", stageTerms) # eg. alternance, stagiaire etc...
 
     
