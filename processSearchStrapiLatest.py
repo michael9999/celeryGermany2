@@ -24,7 +24,7 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
     
     #print("processSearchGo) running")
     # res, nbPages, varPts, firmPts, languagePts, MinPoints, searchName, list_variables, FIRMList, Language, psssID
-    print(res)
+    print("should show all patterns: ", res)
     print(nbPages)
     print(varPts)
     print(firmPts)
