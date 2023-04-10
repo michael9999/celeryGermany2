@@ -98,6 +98,7 @@ def runFullSearch(id):
             flattened.append(val)
             
     #print(flattened)
+    logger.info(f'Log info: List of patterns {flattened}')
 
     newTest = processSearchGo(flattened, nbPages, varPts, firmPts, languagePts, MinPoints, searchName, searchTerm, firm_list_names, language, idNb, jobtitles, stageTerms, jobID, jobPts, locPts)
 

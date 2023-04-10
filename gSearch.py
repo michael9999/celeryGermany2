@@ -30,7 +30,7 @@ def gSearch(chosenEntity, NbPages):
     import datetime
     import settings
 
-
+    settings.init()
     # build query for google
 
     search_query_content = chosenEntity
