@@ -89,6 +89,7 @@ def runFullSearch(id):
 
     test = process_listsStrapi(patternList, firmList, searchTarget, searchTerm, location, language)
 
+    logger.info(f'Just after process_listsStrapi: {test}')
 
     # 4. Do Google search
 

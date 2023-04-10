@@ -3,6 +3,7 @@ import re
 from itertools import product
 from collections import defaultdict
 from pprint import pprint
+from celery.utils.log import get_task_logger
 
 def process_listsStrapi(patterns, firm_list, search_target, search_term, location, language):
     
@@ -76,6 +77,6 @@ def process_listsStrapi(patterns, firm_list, search_target, search_term, locatio
             subresult.append(new_pattern)
         result.append(subresult)
 
-    #print("process_lists() : query")
-    #print(result)
+    print("process_lists() : query")
+    print(result)
     return result
