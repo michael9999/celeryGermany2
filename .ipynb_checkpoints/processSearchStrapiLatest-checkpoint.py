@@ -92,11 +92,7 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
                 print("get all towns")
                 testUrl = "towns"
                 query = "?_where[parentcity]="
-
-                #searchValLoc = "Paris"
-
-                searchValLoc = targetLocation
-
+                searchValLoc = "Paris"
                 testTrigger = strapiApi(testUrl, query, searchValLoc)
                 allTowns = []
 
@@ -149,12 +145,7 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
 
                         test = getProfileProxyCurl(li["link"])
                         test2 = handPcResponse(test, li["link"])
-
-                        # should put try in here in case no json returned, move to next?
-                        try:
-                            scrapedProfile = test2.json()
-                        except:
-                            continue
+                        scrapedProfile = test2.json()
                         #print("processSearchGo) scraped profile : ", scrapedProfile)
 
                         testAdd = "test"
