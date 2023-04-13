@@ -61,10 +61,11 @@ def getControlPanelDataStrapi(searchid):
 
             # check for assigned job id
 
-            if record == "job": 
+            #if record == "job": 
                 #print("JOB ID is:", test[0][record]['id'])
+            #    jobID = test[0][record]['id']
+            if 'job' in record:
                 jobID = test[0][record]['id']
-
 
 
             if 'searchterms' in record:
