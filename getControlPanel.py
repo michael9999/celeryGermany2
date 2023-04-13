@@ -54,6 +54,7 @@ def getControlPanelDataStrapi(searchid):
         # Check that we can access all details from ControlPanel
 
 ## !!!!!! - Use this loop if I want to process multiple searches from Controlpanel at the same time
+        jobID = test[0]['job']['id']
 
         for record in test[0]:
 
@@ -64,8 +65,8 @@ def getControlPanelDataStrapi(searchid):
             #if record == "job": 
                 #print("JOB ID is:", test[0][record]['id'])
             #    jobID = test[0][record]['id']
-            if 'job' in record:
-                jobID = test[0][record]['id']
+            #if 'job' in record:
+            #    jobID = test[0][record]['id']
 
 
             if 'searchterms' in record:
