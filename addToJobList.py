@@ -30,7 +30,7 @@ def addToJobList(cand, searchID, jobID, finalPoints, candName):
     print("should contain the correct job: ", goQuery)
     print(goQuery)
 
-    jobName = goQuery[0]["name"]
+    jobName = goQuery[0]["job_title"]
 
     print("addToJobList) job name : ", jobName)
 
