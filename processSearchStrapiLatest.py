@@ -53,7 +53,7 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
     # airUrl, candId, payload
     runUpdate = updateStrapiApi_PC(testUrl, liveId, payload)
     
-    # process patterns, loop
+    # process patterns, loop, (res is the number of search patterns)
     
     for items in res:
         

@@ -11,9 +11,9 @@ def checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm
 
     #(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm)
 
-    #print("checkForVars) check : ") # cand # jobID
+    print("checkForVars) check : ") # cand # jobID
 
-    #print("checkForVars) JOB ID : ", jobID)
+    print("checkForVars) JOB ID : ", jobID)
 
     #print("checkForVars) candidate strapi ID : ", cand)
 
@@ -129,6 +129,10 @@ def checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm
 
             # cand = candidate ID
             # jobID = job ID 
+
+            # get current job name and id
+            
+
 
             # add candidate to job list 
 

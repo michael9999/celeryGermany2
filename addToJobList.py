@@ -16,9 +16,32 @@ def addToJobList(cand, searchID, jobID, finalPoints, candName):
 
     print("addToJobList) Cand name : ", candName)
 
+    # get current job name 
+
+    testUrl = "control-panels"
+    query = "?_where[id]="
+    searchVal = jobID
+
+    print("addToJobList) job id sent to strapi: ", searchVal)
+
+    # get search clicked on 
+    goQuery = strapiApi(testUrl, query, searchVal)
+
+    print(goQuery)
+
+    jobName = goQuery["name"]
+
+    print("addToJobList) job name : ", jobName)
+
+    # build new job structure for joblist json field
+    # "Accountant(Lux)-138"
+
+    finJobName = jobName + "-" + jobID
+    
+
     # add new application to "applications" table
-   
-        # convert cand nb to string for api
+
+    # convert cand nb to string for api
     cand = str(cand)
 
     new_application = {}
@@ -36,7 +59,10 @@ def addToJobList(cand, searchID, jobID, finalPoints, candName):
 
     # update candidate object, add score, new application, new job (to json and shared fields)
 
-    new_jobs = {"jobs": [jobID]}
+    # new_jobs = {"jobs": [jobID]}
+
+    new_jobs = {"jobs": [finJobName]}
+
     payload = {"joblist": new_jobs, "internal_points":finalPoints, 
     "applications":[appID], "jobs":[jobID]}
 
