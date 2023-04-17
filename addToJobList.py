@@ -18,7 +18,7 @@ def addToJobList(cand, searchID, jobID, finalPoints, candName):
 
     # get current job name 
 
-    testUrl = "control-panels"
+    testUrl = "jobs"
     query = "?_where[id]="
     searchVal = jobID
 
@@ -27,9 +27,10 @@ def addToJobList(cand, searchID, jobID, finalPoints, candName):
     # get search clicked on 
     goQuery = strapiApi(testUrl, query, searchVal)
 
+    print("should contain the correct job: ", goQuery)
     print(goQuery)
 
-    jobName = goQuery["name"]
+    jobName = goQuery[0]["name"]
 
     print("addToJobList) job name : ", jobName)
 
