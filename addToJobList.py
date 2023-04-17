@@ -37,7 +37,7 @@ def addToJobList(cand, searchID, jobID, finalPoints, candName):
     # build new job structure for joblist json field
     # "Accountant(Lux)-138"
 
-    finJobName = jobName + "-" + jobID
+    finJobName = jobName + "-" + str(jobID)
     
 
     # add new application to "applications" table
