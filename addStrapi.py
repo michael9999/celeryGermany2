@@ -43,12 +43,12 @@ def addStrapiApi(strapiUrl, payload):
     #strapiUrl = finalUrl
 
     # which endpoint?
-    #print("addStrapiApi) endpoint : ", finalUrl)
+    print("addStrapiApi) endpoint : ", finalUrl)
 
     # make request
     response = requests.request("POST", finalUrl, data=json.dumps(payload), headers=headers)
 
-    #print("addStrapiApi) reponse returned: ", response.content)
+    print("addStrapiApi) reponse returned: ", response.content)
 
     response_data = response.json()
     return response_data

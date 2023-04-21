@@ -172,6 +172,7 @@ def buildSendExperiences(testDate, candID, stageTerms):
         targetUrl = "work-histories"
 
         # addStrapiApi(strapiUrl, payload)
+        print("buildSendExperiences) WH to add: ", experienceToAdd)
         goApi = addStrapiApi(targetUrl, experienceToAdd)
 
         #workIds.append(goApi["id"])
