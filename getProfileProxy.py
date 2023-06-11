@@ -2,6 +2,7 @@ def getProfileProxyCurl(liUrl):
 
     import requests
     import settings
+    import urllib.parse
 
     api_endpoint = 'https://nubela.co/proxycurl/api/v2/linkedin'
 
@@ -37,6 +38,11 @@ def getProfileProxyCurl(liUrl):
 
     # test
     #liUrl = "https://fr.linkedin.com/in/karinedisdiermikus/en/"
+
+    # Get rid of French accents etc...
+    # new_candidate["li_url"] = urllib.parse.unquote(liUrl)
+    b = urllib.parse.unquote(b)
+
 
     api_key2 = settings.api_key
 
