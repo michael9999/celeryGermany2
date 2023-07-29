@@ -32,8 +32,8 @@ def applyCheck(listToCheck, valueToCheck, pointsComp):
             #print("applyCheck) MATCH ON " + itemB + " in : " + linkedinLower)
 
             result = "found"
-            pointsComp += 1
-            #pointsComp = pointsComp
+            #pointsComp += 1
+            pointsComp = pointsComp
             break
             #maxPoints = int(maxPoints)
             #age_int = int(age)

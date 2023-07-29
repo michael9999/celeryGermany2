@@ -19,9 +19,9 @@ from checkForVars import *
 import urllib.parse
 
 def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searchName, list_variables, FIRMList, Language, searchID, jobtitles, stageTerms, jobID, jobPts, locPts):
-    
+
     # import update strapi
-    
+
     #print("processSearchGo) running")
     # res, nbPages, varPts, firmPts, languagePts, MinPoints, searchName, list_variables, FIRMList, Language, psssID
     print("should show all patterns: ", res)
@@ -38,10 +38,10 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
     print(jobtitles)
     print("processSearchGo) - work experiences terms - ", stageTerms) # eg. alternance, stagiaire etc...
 
-    
 
-    # % Update search status to "running" = OK 
-    
+
+    # % Update search status to "running" = OK
+
     # testUrl = "https://strapi-1oni.onrender.com/control-panels/"
 
     testUrl = "control-panels/"
@@ -49,23 +49,23 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
     liveId = str(searchID)
 
     payload = {"action": "Running"}
-    
+
     # airUrl, candId, payload
     runUpdate = updateStrapiApi_PC(testUrl, liveId, payload)
-    
+
     # process patterns, loop, (res is the number of search patterns)
-    
+
     for items in res:
-        
+
         testUrl = "control-panels"
         query = "?_where[id]="
         #searchVal = liveId
         searchVal = str(searchID)
         testTrigger = strapiApi(testUrl, query, searchVal)
-        
+
         if testTrigger[0]['action'] == "Running":
             #print("search is still live")
-            
+
             # get location
             if testTrigger[0]['location']:
                 targetLocation = testTrigger[0]['location']
@@ -109,7 +109,7 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
                     #print(list_variables)
 
 
-            
+
                     else:
                         print("no towns found")
 
@@ -118,13 +118,13 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
             test1 = gSearch(items, nbPages)
             #print(test1)
 
-            # Check if there are any results 
+            # Check if there are any results
 
             if test1['search_information']['organic_results_state'] == "Fully empty":
 
                 print("processSearchGo) NO RESULTS FOR THIS PATTERN: ", items)
 
-            else: 
+            else:
                 #print("continue!")
 
                 for li in test1['organic_results']:
@@ -142,7 +142,7 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
                     tempName = li["title"]
                     #print("processSearchGo) in db or not? ", existCand)
 
-                    # call proxycurl if new candidate:  
+                    # call proxycurl if new candidate:
                     if(existCand == "goproxyCurl"):
 
                         #print("processSearchGo) Run proxy curl - NEW CAND ------ ")
@@ -160,8 +160,8 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
                         testAdd = "test"
                         # Gets "people also viewed", adds to Candidates Searches
 
-                        for value in scrapedProfile["people_also_viewed"]: 
-    
+                        for value in scrapedProfile["people_also_viewed"]:
+
                             #print("processSearchGo) processing 'people also viewed'")
                             # build object with these fields : link, name, summary, location
                             payload = {}
@@ -170,11 +170,11 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
                             payload["details"] = value["summary"]
                             payload["notes"] = value["location"]
                             payload["profiletype"] = "people_also_viewed"
-                            
+
                             #goUrl = "https://strapi-1oni.onrender.com/candidates-searches"
 
                             goUrl = "candidates-searches"
-                            
+
                             testAdd = addStrapiApi(goUrl, payload)
 
                         #print("processSearchGo) which extra profiles were added ? ", testAdd)
@@ -191,7 +191,7 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
                         jobIds, jobtitlesTS, firmsTS, allworkexperiences  = buildSendExperiences(scrapedProfile, newid, stageTerms)
 
                         ############# addCandLanguages (get languages) = OK ############@
-                        languageIds = addCandLanguages(scrapedProfile) 
+                        languageIds = addCandLanguages(scrapedProfile)
 
                         ############# buildSendEducation (get scrapedProfile) = OK ############
                         educationIds = buildSendEducation(scrapedProfile)
@@ -213,19 +213,19 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
                             # WORK HISTORY ID CHECKED = OK
 
                             jobIds = [3362]
-                            
+
                         else:
-                            
+
                             print("job id is set")
 
                         # Update candidate (education, work exp, languages, skills)
-                         
-                        payload = {"educations": educationIds, "work_histories": jobIds, 
+
+                        payload = {"educations": educationIds, "work_histories": jobIds,
                         "cand_languages": languageIds, "skills":[33994]}
 
                         #sUrl = "https://strapi-1oni.onrender.com/candidates/"
 
-                        sUrl = "candidates/"    
+                        sUrl = "candidates/"
 
                         cand = newid
 
@@ -236,39 +236,39 @@ def processSearchGo(res, nbPages, varPts, firmPts, languagePts, MinPoints, searc
                         # Create optimised search field
                         #
                         creatOptSearchField = createCandOptSearch(cand)
-                        #print("**************** optimised search): ", creatOptSearchField)                                        
+                        #print("**************** optimised search): ", creatOptSearchField)
 
-                        # Get job titles and search variables and look for them 
+                        # Get job titles and search variables and look for them
 
                         # search vars : jobtitles, list_variables, FIRMList - should be okay
 
                         # jobtitlesTS (all job titles), firmsTS (all firms), creatOptSearchField (all data?)
                         # currJtitle, currFirm
                         # targetyrsexp
-                        #checkVar = checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm, allworkexperiences) # current jobtitle, current company, list of previous jobtitles, all search vars 
+                        #checkVar = checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm, allworkexperiences) # current jobtitle, current company, list of previous jobtitles, all search vars
 
                         checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm, allworkexperiences,
 						searchName, list_variables, FIRMList, Language, searchVal, jobtitles, allTowns, targetyrsexp, currLocation, currYrsExp, cand, jobID,
-                        varPts, firmPts, languagePts, jobPts, locPts, candName)
+                        varPts, firmPts, languagePts, jobPts, locPts, candName, MinPoints)
 
-                        # add cand to job / search or not 
-                        
+                        # add cand to job / search or not
 
 
-                    else: 
+
+                    else:
 
                         continue
                 # if test1['organic_results']:
 
-                
-            
+
+
 
                 # call proxycurl if new candidate
 
-            
+
         else:
             #print("Log info: Google search stopped")
             return "search no longer active"
             #print("search deactivated")
-    
+
     return "done"

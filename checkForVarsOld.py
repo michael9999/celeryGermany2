@@ -2,7 +2,7 @@ from applyCheck import *
 from applyYrsCheck import *
 from addToJobList import *
 
-def checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm, allExperiences, searchName, list_variables, FIRMList, Language, searchID, jobtitles, targetLocation, targetyrsexp, currLocation, currYrsExp, cand, jobID, varPts, firmPts, languagePts, jobPts, locPts, candName, MinPoints):
+def checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm, allExperiences, searchName, list_variables, FIRMList, Language, searchID, jobtitles, targetLocation, targetyrsexp, currLocation, currYrsExp, cand, jobID, varPts, firmPts, languagePts, jobPts, locPts, candName):
 
     # checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm, allworkexperiences,
 						# searchName, list_variables, FIRMList, Language, psssID, jobtitles)
@@ -14,10 +14,6 @@ def checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm
     print("checkForVars) check : ") # cand # jobID
 
     print("checkForVars) JOB ID : ", jobID)
-
-    print("checkForVars) MinPoints : ", MinPoints)
-
-    # MinPoints
 
     #print("checkForVars) candidate strapi ID : ", cand)
 
@@ -52,28 +48,20 @@ def checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm
     #print("checkForVars) target years experience (search data) : ",  targetyrsexp)
 
     #print("checkForVars) candidate's nb of years experience (search data) : ",  currYrsExp)
-
+ 
     # perform all checks, apply scores currYrsExp
-
+    
     # minimum pass =
         # current jobtitle = ok AND location = ok
-
+    
     # 1) current jobtitle (text) IMPORTANT
         # 1 pt is added
 
-
-
     if (currJtitle) and (jobtitles):
 
-        if(jobPts):
+        testPoints1 = applyCheck(jobtitles, currJtitle, 0)
 
-            print("jobPts set, do job title check")
-            testPoints1 = applyCheck(jobtitles, currJtitle, jobPts)
-
-        else:
-            testPoints1 = 0
-
-    else:
+    else: 
         print("checkForVars) -£££££££££££ jobtitle and list of titles not found")
         testPoints1 = 0
 
@@ -83,89 +71,94 @@ def checkForVars(jobtitlesTS, firmsTS, creatOptSearchField, currJtitle, currFirm
 
     if (currLocation) and (targetLocation):
 
-        if(locPts):
+        testPoints2 = applyCheck(targetLocation, currLocation, 0)
 
-            testPoints2 = applyCheck(targetLocation, currLocation, locPts)
-
-        else:
-            testPoints2 = 0
-
-    else:
+    else: 
         #print("checkForVars) -£££££££££££ currentlocation and list of locations not found")
         testPoints2 = 0
 
-    # ! check that jobtitle and location have been found
-
+    # ! check that jobtitle and location have been found 
+    
     stageOnePoints = testPoints1 + testPoints2
 
-    #if (stageOnePoints == (locPts + jobPts)) or (stageOnePoints > (locPts + jobPts)):
+    if (stageOnePoints == 2) or (stageOnePoints > 2):
 
         # continue with other checks
         # add candidate to job / search list
-    print("checkForVars) location and jobtitle matched")
+        #print("checkForVars) location and jobtitle matched")
 
-
+    
         # 3) keyword search - list_variables, creatOptSearchField
 
-    if (list_variables) and (creatOptSearchField):
-
-        if (varPts):
+        if (list_variables) and (creatOptSearchField):
 
             testPoints3 = applyCheck(list_variables, creatOptSearchField, varPts)
 
-        else:
-
-            testPoints3 = 0
-
-    else:
+        else: 
             #print("checkForVars) -£££££££££££ list_variables and creatOptSearchField not found")
-        testPoints3 = 0
+            testPoints3 = 0
 
         # 4) firm search - best to search roll-up field (creatOptSearchField) instead of currFirm
 
-    if (FIRMList) and (creatOptSearchField):
-
-        if(firmPts):
+        if (FIRMList) and (creatOptSearchField):
 
             testPoints4 = applyCheck(FIRMList, creatOptSearchField, firmPts)
 
-        else:
-
+        else: 
+            #print("checkForVars) -£££££££££££ list_variables and currFirm not found")
             testPoints4 = 0
 
-    else:
-            #print("checkForVars) -£££££££££££ list_variables and currFirm not found")
-        testPoints4 = 0
+        # 5) yrsExp 
 
-        # 5) yrsExp
+        if (targetyrsexp) and (currYrsExp):
 
-    if (targetyrsexp) and (currYrsExp):
+            testPoints5 = applyYrsCheck(targetyrsexp, currYrsExp, 0)
 
-        testPoints5 = applyYrsCheck(targetyrsexp, currYrsExp, 0)
 
-    else:
+        else:
             #print("checkForVars) - no years experience found")
-        testPoints5 = 0
+            testPoints5 = 0
 
         # 6) if nb of points is at least 2 then add candidate to job search
 
-    finalPoints = (stageOnePoints + testPoints3 + testPoints4 + testPoints5)
+        finalPoints = (stageOnePoints + testPoints3 + testPoints4 + testPoints5)
 
-        #if (finalPoints > 2) or (finalPoints == 2):
-    if (finalPoints > MinPoints) or (finalPoints == MinPoints):
+        if (finalPoints > 2) or (finalPoints == 2):
 
             #print("checkForVars) points attained, add to joblist") # puts candidate in list of cands for job
 
             # cand = candidate ID
-            # jobID = job ID
+            # jobID = job ID 
 
             # get current job name and id
+            
 
 
-
-            # add candidate to job list
+            # add candidate to job list 
 
             addCand = addToJobList(cand, searchID, jobID, finalPoints, candName)
 
-    else:
-        print("checkForVars) points attained) not enough points, do nothing")
+        else:
+            print("checkForVars) points attained) not enough points, do nothing")    
+
+
+    
+    else: 
+        # didn't meet criteria, return
+        print("checkForVars) didn't meet criteria")
+
+
+    
+	#firms (text)
+	
+    #keyword (text) IMPORTANT
+	#location = (text) IMPORTANT
+	#if location = “paris” then pass in ile de France list
+    
+    
+    
+    
+    
+    
+    # add candidate to specific search targetLocation
+    
