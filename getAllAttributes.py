@@ -170,7 +170,7 @@ def getLocationStrapi():
 
             search_locations.append(location['city'])
 
-            #print(location['city'])
+            print(location['city'])
 
             #print(search_locations)
 
