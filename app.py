@@ -30,6 +30,8 @@ def goFullSearch():
 
     headers = request.headers
     auth = headers.get("X-Api-Key")
+    print("check api key : ", auth)
+
 
     #if auth == 'asoidewfoef':
     if auth == app.secret_key:
@@ -52,14 +54,14 @@ def goFullSearch():
         runFullSearch.delay(searchpapi)
 
         #task = run_FullSearch.apply_async(countdown=10)
-      
+
         test_id = "done"
 
         return test_id
 
     else:
         return jsonify({"message": "ERROR: Unauthorized"}), 401
-    
+
     print("If did not run")
-    
+
     return "done"
